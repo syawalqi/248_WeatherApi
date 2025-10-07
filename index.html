@@ -31,6 +31,20 @@
                     const kecamatan = data.location.tz_id;
                     const longitude = data.location.lon;
                     const latitude = data.location.lat;
+
+
+                    // Tampilkan data
+                    document.getElementById('Tampilan').innerHTML = `
+                        <strong>Cuaca:</strong> ${cuaca}<br>
+                        <strong>Suhu:</strong> ${suhu}<br>
+                        <strong>Kelembapan:</strong> ${kelembapan}<br>
+                        <strong>Lokasi:</strong> ${lokasiNama}<br>
+                        <strong>Negara:</strong> ${negara}<br>
+                        <strong>Provinsi:</strong> ${provinsi}<br>
+                        <strong>Kecamatan (Zona Waktu):</strong> ${kecamatan}<br>
+                        <strong>Longitude:</strong> ${longitude}<br>
+                        <strong>Latitude:</strong> ${latitude}<br>
+                    `;
             },
             fail : function(error){
                 console.log(error);
