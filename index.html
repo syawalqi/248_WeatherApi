@@ -52,6 +52,15 @@
             });
         }
 
+         document.getElementById('btnCari').addEventListener('click', function() {
+            const lokasi = document.getElementById('inputLokasi').value;
+            if(lokasi.trim() !== "") {
+                tampilkanCuaca(lokasi);
+            } else {
+                document.getElementById('Tampilan').innerHTML = "Silakan masukkan lokasi terlebih dahulu.";
+            }
+        });
+
         
     </script>
 </body>
