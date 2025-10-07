@@ -13,20 +13,24 @@
     <button id="btnCari">Cari Cuaca</button>
     <hr>
     <div id="Tampilan"></div>
-    <script>
-        const urlapi = "http://api.weatherapi.com/v1/current.json?key=1de276911fd9409e93c20731250710&q=Yogyakarta&aqi=no";
-        $.ajax({
-            url : urlapi,
-            method : "GET",
-            success : function(data){
-                console.log(data);
-                const t = document.getElementById('Tampilan');
-                const l = document.getElementById('lokasi');
-                let suhu = data.current.temp_c;
-                let lokasi = data.location.name;
-                t.innerHTML = suhu;
-                l.innerHTML = lokasi;
 
+    <script>
+        function tampilkanCuaca(lokasi) {
+            const urlapi = `http://api.weatherapi.com/v1/current.json?key=1de276911fd9409e93c20731250710&q=${encodeURIComponent(lokasi)}&aqi=no`;
+            $.ajax({
+                url : urlapi,
+                method : "GET",
+                success : function(data){
+                    // Ambil data yang dibutuhkan
+                    const cuaca = data.current.condition.text;
+                    const suhu = data.current.temp_c + " °C";
+                    const kelembapan = data.current.humidity + " %";
+                    const lokasiNama = data.location.name;
+                    const negara = data.location.country;
+                    const provinsi = data.location.region;
+                    const kecamatan = data.location.tz_id;
+                    const longitude = data.location.lon;
+                    const latitude = data.location.lat;
             },
             fail : function(error){
                 console.log(error);
