@@ -46,10 +46,13 @@
                         <strong>Latitude:</strong> ${latitude}<br>
                     `;
             },
-            fail : function(error){
-                console.log(error);
-            },
-        })
+                error : function(error){
+                    document.getElementById('Tampilan').innerHTML = "Lokasi tidak ditemukan atau terjadi kesalahan.";
+                },
+            });
+        }
+
+        
     </script>
 </body>
 </html>
