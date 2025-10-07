@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuaca</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+        <div class="container">
+        <h1>Info Cuaca</h1>
+        <label for="inputLokasi">Masukkan Lokasi:</label>
+        <input type="text" id="inputLokasi" placeholder="Contoh: Yogyakarta">
+        <button id="btnCari">Cari Cuaca</button>
+        <div id="Tampilan"></div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <label for="inputLokasi">Masukkan Lokasi:</label>
-    <input type="text" id="inputLokasi" placeholder="Contoh: Yogyakarta">
-    <button id="btnCari">Cari Cuaca</button>
-    <hr>
-    <div id="Tampilan"></div>
-
     <script>
         function tampilkanCuaca(lokasi) {
             const urlapi = `http://api.weatherapi.com/v1/current.json?key=1de276911fd9409e93c20731250710&q=${encodeURIComponent(lokasi)}&aqi=no`;
