@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuaca</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <label for="inputLokasi">Masukkan Lokasi:</label>
+    <input type="text" id="inputLokasi" placeholder="Contoh: Yogyakarta">
+    <button id="btnCari">Cari Cuaca</button>
+    <hr>
+    <div id="Tampilan"></div>
+
+    <script>
+        function tampilkanCuaca(lokasi) {
+            const urlapi = `http://api.weatherapi.com/v1/current.json?key=1de276911fd9409e93c20731250710&q=${encodeURIComponent(lokasi)}&aqi=no`;
+            $.ajax({
+                url : urlapi,
+                method : "GET",
+                success : function(data){
+                    // Ambil data yang dibutuhkan
+                    const cuaca = data.current.condition.text;
+                    const suhu = data.current.temp_c + " °C";
+                    const kelembapan = data.current.humidity + " %";
+                    const lokasiNama = data.location.name;
+                    const negara = data.location.country;
+                    const provinsi = data.location.region;
+                    const kecamatan = data.location.tz_id;
+                    const longitude = data.location.lon;
+                    const latitude = data.location.lat;
+
+                    // Tampilkan data
+                    document.getElementById('Tampilan').innerHTML = `
+                        <strong>Cuaca:</strong> ${cuaca}<br>
+                        <strong>Suhu:</strong> ${suhu}<br>
+                        <strong>Kelembapan:</strong> ${kelembapan}<br>
+                        <strong>Lokasi:</strong> ${lokasiNama}<br>
+                        <strong>Negara:</strong> ${negara}<br>
+                        <strong>Provinsi:</strong> ${provinsi}<br>
+                        <strong>Kecamatan (Zona Waktu):</strong> ${kecamatan}<br>
+                        <strong>Longitude:</strong> ${longitude}<br>
+                        <strong>Latitude:</strong> ${latitude}<br>
+                    `;
+                },
+                error : function(error){
+                    document.getElementById('Tampilan').innerHTML = "Lokasi tidak ditemukan atau terjadi kesalahan.";
+                },
+            });
+        }
+
+        document.getElementById('btnCari').addEventListener('click', function() {
+            const lokasi = document.getElementById('inputLokasi').value;
+            if(lokasi.trim() !== "") {
+                tampilkanCuaca(lokasi);
+            } else {
+                document.getElementById('Tampilan').innerHTML = "Silakan masukkan lokasi terlebih dahulu.";
+            }
+        });
+
+        // Optional: tampilkan cuaca default saat pertama kali
+        tampilkanCuaca("Yogyakarta");
+    </script>
+</body>
+</html>
